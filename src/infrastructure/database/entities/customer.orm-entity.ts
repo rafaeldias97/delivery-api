@@ -1,17 +1,9 @@
 import { CustomerEntity } from 'src/domain/entities/customer.entity';
-import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from './base.entity';
 
 @Entity('customers')
-export class DBCustomer implements CustomerEntity {
-  @PrimaryGeneratedColumn('uuid', { name: 'id' })
-  id?: string;
+export class DBCustomer extends BaseEntity implements CustomerEntity {
   @Column({ name: 'image' })
   image: string;
   @Column({ name: 'name' })
@@ -20,10 +12,4 @@ export class DBCustomer implements CustomerEntity {
   email: string;
   @Column({ name: 'password' })
   password: string;
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt?: Date;
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt?: Date;
-  @DeleteDateColumn({ name: 'deleted_at' })
-  deletedAt?: Date;
 }

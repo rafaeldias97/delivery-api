@@ -1,10 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column } from 'typeorm';
+import { BaseEntity } from './base.entity';
 
 @Entity('couriers')
-export class DBCourier {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class DBCourier extends BaseEntity {
   @Column({ type: 'varchar', length: 100 })
   name: string;
 
