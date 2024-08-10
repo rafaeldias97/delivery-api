@@ -1,6 +1,7 @@
 import { CustomerEntity } from 'src/domain/entities/customer.entity';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseEntity } from './base.entity';
+import { DBDelivery } from './delivery.orm-entity';
 
 @Entity('customers')
 export class DBCustomer extends BaseEntity implements CustomerEntity {
@@ -12,4 +13,7 @@ export class DBCustomer extends BaseEntity implements CustomerEntity {
   email: string;
   @Column({ name: 'password' })
   password: string;
+
+  @OneToMany(() => DBDelivery, (delivery) => delivery.customer)
+  deliveries: DBDelivery[];
 }

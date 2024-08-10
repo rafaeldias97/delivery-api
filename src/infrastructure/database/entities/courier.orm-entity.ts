@@ -1,5 +1,6 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, OneToMany } from 'typeorm';
 import { BaseEntity } from './base.entity';
+import { DBDelivery } from './delivery.orm-entity';
 
 @Entity('couriers')
 export class DBCourier extends BaseEntity {
@@ -28,6 +29,6 @@ export class DBCourier extends BaseEntity {
   })
   vehicleDetails?: string;
 
-  //   @OneToMany(() => Delivery, (delivery) => delivery.courier)
-  //   deliveries: Delivery[];
+  @OneToMany(() => DBDelivery, (delivery) => delivery.courier)
+  deliveries: DBDelivery[];
 }

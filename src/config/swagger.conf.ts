@@ -7,7 +7,7 @@ export const openApi = (app: INestApplication<any>) => {
     .setTitle('Delivery API')
     .setDescription('The API description')
     .setVersion('1.0')
-    .addTag('docs')
+    // .addTag('docs')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);

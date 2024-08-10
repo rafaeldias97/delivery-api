@@ -1,0 +1,6 @@
+entry: dist/main.js
+output: build
+keep:
+  - dist/**
+  - node_modules/**
+  - package.json
