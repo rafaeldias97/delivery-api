@@ -24,15 +24,73 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Este é um repositório genérico para um serviço de entrega construído com NestJS e TypeORM. O projeto segue o padrão Ports and Adapters (ou Hexagonal Architecture) e utiliza Docker para a configuração do ambiente. A documentação da API é gerada com Swagger.
 
-## Installation
+## Estrutura do Projeto
+
+A estrutura do projeto é organizada conforme o padrão Ports and Adapters para promover a separação clara entre a lógica de negócios e as implementações específicas:
+
+- **`src/application/`**: Contém casos de uso e serviços da aplicação.
+  - **`use-cases/`**: Casos de uso que definem a lógica de negócios.
+  - **`services/`**: Serviços que encapsulam a lógica de negócios e interagem com os repositórios.
+
+- **`src/domain/`**: Contém as entidades e interfaces do domínio.
+  - **`entities/`**: Entidades do domínio, sem dependência de TypeORM.
+  - **`interfaces/`**: Interfaces que abstraem a implementação específica.
+
+- **`src/infrastructure/`**: Contém as implementações concretas e a configuração da infraestrutura.
+  - **`database/`**
+    - **`repositories/`**: Repositórios implementados com TypeORM.
+    - **`entities/`**: Entidades específicas do TypeORM.
+  - **`http/`**
+    - **`controllers/`**: Controladores para gerenciar requisições HTTP.
+    - **`routes/`**: Definição de rotas.
+    - **`middlewares/`**: Middlewares para tratamento de erros e outras funcionalidades.
+  - **`mappers/`**: Mapeamento entre entidades de domínio e DTOs.
+
+- **`src/config/`**: Configurações do projeto.
+  - `typeorm.ts`: Configuração do TypeORM.
+  - `swagger.conf.ts`: Configuração do Swagger.
+
+- **`src/shared/`**: Componentes compartilhados e utilitários.
+  - **`constants/`**: Constantes usadas em toda a aplicação.
+  - **`exceptions/`**: Exceções e erros personalizados.
+  - **`utils/`**: Funções auxiliares e utilitários.
+
+- **`src/main.ts`**: Arquivo principal que inicia a aplicação NestJS.
+- **`src/app.module.ts`**: Módulo raiz da aplicação que configura e integra todos os módulos.
+
+## Requisitos
+
+- **Node.js**: Versão 18.x
+- **Docker** e **Docker Compose**
+- Conta na AWS
+
+## Configuração do Ambiente
+
+1. Configure as variáveis de ambiente:
+* Copie o arquivo .env.example para .env:
+```bash
+$ cp .env.example .env
+```
+* Edite o arquivo .env e substitua as variáveis de ambiente com os valores apropriados para o seu ambiente.
+
+2. Suba o banco de dados com Docker:
+
+* Execute o Docker Compose para iniciar os serviços:
+```bash
+$ docker-compose up -d
+```
+
+
+## Instalação
 
 ```bash
+$ nvm use 18
 $ yarn install
 ```
 
-## Running the app
+## Rodando o app
 
 ```bash
 # development
@@ -45,7 +103,7 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-## Test
+## Teste
 
 ```bash
 # unit tests
@@ -58,15 +116,12 @@ $ yarn run test:e2e
 $ yarn run test:cov
 ```
 
-## Support
+## Documentação da API
+A documentação da API está disponível através do Swagger e pode ser acessada em:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+http://localhost:3000/docs
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 
